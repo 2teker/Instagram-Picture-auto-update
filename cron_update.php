@@ -6,7 +6,7 @@ $db_user                	= "";				// Database User
 $db_password            	= "";				// Database password
 $db_host                	= "";				// Host
 
-$table_prefix					= "wp_";			// tabele prefix
+$table_prefix			= "wp_";			// tabele prefix
 
 mysql_connect($db_host,$db_user,$db_password) or die
 ("NOT ABLE TO CONNECT TO DATABASE");
