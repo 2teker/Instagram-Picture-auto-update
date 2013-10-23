@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 /* Config */
 // Here you enter the database connection.
 $db_name                	= ""; 			// Database name
@@ -6,7 +7,7 @@ $db_user                	= "";				// Database User
 $db_password            	= "";				// Database password
 $db_host                	= "";				// Host
 
-$table_prefix			= "wp_";			// tabele prefix
+$table_prefix					= "wp_";			// tabele prefix
 
 mysql_connect($db_host,$db_user,$db_password) or die
 ("NOT ABLE TO CONNECT TO DATABASE");
@@ -113,7 +114,7 @@ $instagram_access = $row->text;
 			$data=json_decode($resp, true);
 			
 			// Since Instagram rausrueckt only 20 pictures per query, but we want more, we save the first next_url so that we can continue to read later.
-			$url = $data["pagination"]["next_url"];
+			$url = (isset($data["pagination"]["next_url"])) ? $data["pagination"]["next_url"] : '';
 	
 			// Storage error in the variable
 			$error = $data["meta"]["code"];	
@@ -126,7 +127,7 @@ $instagram_access = $row->text;
 				
 				// The for loop goes until the end is reached while
 				for ($i = 0; $i < $size; $i++)
-            			{
+            {
             				// Save image information in variables
 					$bild_low			= $data["data"]["$i"]['images']['low_resolution']['url'];
 					$bild_thumb			= $data["data"]["$i"]['images']['thumbnail']['url'];
@@ -180,11 +181,11 @@ $instagram_access = $row->text;
 						$data=json_decode($resp, true);
 					
 						$size = sizeof($data["data"]);
-			
-						$url = $data["pagination"]["next_url"];
-					
+
+						$url = (isset($data["pagination"]["next_url"])) ? $data["pagination"]["next_url"] : '';
+											
 						for ($i = 0; $i < $size; $i++)
-            					{
+            		{
 							$bild_low			= $data["data"]["$i"]['images']['low_resolution']['url'];
 							$bild_thumb			= $data["data"]["$i"]['images']['thumbnail']['url'];
 							$bild_standard			= $data["data"]["$i"]['images']['standard_resolution']['url'];
