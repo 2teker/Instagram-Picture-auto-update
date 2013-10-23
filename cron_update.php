@@ -9,10 +9,20 @@ $db_host                	= "";				// Host
 
 $table_prefix					= "wp_";			// tabele prefix
 
+$email							= "";				// Email when an error is (If it is empty, no mail is sent.)
+
 mysql_connect($db_host,$db_user,$db_password) or die
 ("NOT ABLE TO CONNECT TO DATABASE");
 mysql_select_db($db_name) or die
 ("THE DATABASE DOES NOT EXIST!");
+
+function email($mail, $error) {
+	$sender = $mail;
+	$empfaenger = $mail;
+	$betreff = "ERROR AUTO UPDATE INSTAGRAM-PICTURE";
+	$mailtext = "An error has occurred.\n\nERROR:$error\n";
+	mail($empfaenger, $betreff, $mailtext, "From: $sender ");
+}
 
 $table_info				= $table_prefix.'instagram_info';
 $table_bilder				= $table_prefix.'instagram_bilder';
@@ -47,7 +57,12 @@ $instagram_access = $row->text;
 
 		if(curl_exec($curl) === false)
 		{
-    		echo "cUrl-Error \n " . curl_error($curl);
+    		$error = curl_error($curl);
+    		echo 'Curl-Fehler: ' . $error;
+    		if(!empty($email))
+			{
+				email($email, $error);
+			}
 		}
 
 		$resp = curl_exec($curl);
@@ -221,7 +236,15 @@ $instagram_access = $row->text;
     			
     		}
     		// Instagram ID and access token does not match
-    		else { echo 'Problem of Authentication.'; }
+    		else 
+    		{  
+				$error = "Problem of Authentication";
+				echo $error;
+    			if(!empty($email))
+				{
+					email($email, $error);
+				}
+			}
 
 		}
 
