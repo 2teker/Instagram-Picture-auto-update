@@ -10,6 +10,6 @@ Wordpress-Site: http://wordpress.org/plugins/instagram-picture/
 =============================
 Tutorial
 
-see wiki
+See Wiki: https://github.com/TB-WebTec/Instagram-Picture-auto-update/wiki
 
 
