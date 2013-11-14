@@ -7,9 +7,9 @@ $db_user                	= "";				// Database User
 $db_password            	= "";				// Database password
 $db_host                	= "";				// Host
 
-$table_prefix					= "wp_";			// tabele prefix
+$table_prefix			= "wp_";			// tabele prefix
 
-$email							= "";				// Email when an error is (If it is empty, no mail is sent.)
+$email				= "";				// Email when an error is (If it is empty, no mail is sent.)
 
 mysql_connect($db_host,$db_user,$db_password) or die
 ("NOT ABLE TO CONNECT TO DATABASE");
@@ -26,7 +26,7 @@ function email($mail, $error) {
 
 $table_info				= $table_prefix.'instagram_info';
 $table_bilder				= $table_prefix.'instagram_bilder';
-$table_user_info		= $table_prefix.'instagram_user_info';
+$table_user_info			= $table_prefix.'instagram_user_info';
 
 $ergebnis = mysql_query("SELECT text FROM $table_info WHERE id='1'");
 $row = mysql_fetch_object($ergebnis);
@@ -82,8 +82,8 @@ $instagram_access = $row->text;
 			{
 				// variable storage
 				$username				= $data["data"]["username"];
-				$profil_picture 	= $data["data"]["profile_picture"];
-				$full_name 			= $data["data"]["full_name"];
+				$profil_picture 			= $data["data"]["profile_picture"];
+				$full_name 				= $data["data"]["full_name"];
 				$media					= $data["data"]["counts"]["media"];
 				$follwed				= $data["data"]["counts"]["followed_by"];
 				$follows				= $data["data"]["counts"]["follows"];
